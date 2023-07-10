@@ -1,0 +1,16 @@
+<entity-mappings>
+    <entity class="com.bookshop.model.Book">
+        <table name="book_xml_mapping" />
+        <attributes>
+            <basic name="title">
+                <column name="book_title" nullable="false" updatable="false" />
+            </basic>
+            <basic name="description">
+                <column length="2000" />
+            </basic>
+            <basic name="numOfPages">
+                <column name="num_of_pages" nullable="false" />
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

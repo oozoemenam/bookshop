@@ -1,14 +1,11 @@
 package com.bookshop.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -16,21 +13,16 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Author {
+public class OrderLine {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+    private String item;
 
-    @Email
-    private String email;
+    private Double unitPrice;
 
-    @Column(length = 2000)
-    private String bio;
-
-    private LocalDate dateOfBirth;
+    private Integer quantity;
 
     @Override
     public final boolean equals(Object o) {
@@ -39,8 +31,8 @@ public class Author {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Author author = (Author) o;
-        return getId() != null && Objects.equals(getId(), author.getId());
+        OrderLine orderLine = (OrderLine) o;
+        return getId() != null && Objects.equals(getId(), orderLine.getId());
     }
 
     @Override
