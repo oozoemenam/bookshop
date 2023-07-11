@@ -13,7 +13,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class OrderLine {
+public class OrderItem {
     @Id
     @GeneratedValue
     private Long id;
@@ -31,8 +31,8 @@ public class OrderLine {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        OrderLine orderLine = (OrderLine) o;
-        return getId() != null && Objects.equals(getId(), orderLine.getId());
+        OrderItem orderItem = (OrderItem) o;
+        return getId() != null && Objects.equals(getId(), orderItem.getId());
     }
 
     @Override

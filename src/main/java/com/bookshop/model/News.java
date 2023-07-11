@@ -14,9 +14,9 @@ public class News {
     @Column(nullable = false)
     private String content;
 
-    // @OrderBy("postedDate DESC, note ASC")
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("postedDate DESC, note ASC")
+    // @JoinColumn(name = "comment_id")
     // @OrderColumn(name = "publication_index")
-    @OrderColumn
     private List<Comment> comments;
 }

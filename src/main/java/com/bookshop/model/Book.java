@@ -13,20 +13,11 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(nullable = false, updatable = false)
-    private String title;
-
-    private Float price;
-
-    @Column(length = 500)
-    private String description;
+public class Book extends Item {
 
     private String isbn;
+
+    private String publisher;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "Tag")

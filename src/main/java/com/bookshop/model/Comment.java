@@ -25,7 +25,7 @@ public class Comment {
 
     private Integer note;
 
-//    private LocalDateTime postedDate;
+    private LocalDateTime postedDate;
 
     @Override
     public final boolean equals(Object o) {

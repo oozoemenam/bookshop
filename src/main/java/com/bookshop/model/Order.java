@@ -4,31 +4,26 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table(name = "`order`")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class CD extends Item {
+public class Order {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    private Float totalDuration;
+    private LocalDateTime creationDate;
 
-    private String genre;
-
-    @ManyToMany(mappedBy = "appearsOnCDs")
-    @ToString.Exclude
-    private Set<Artist> createdByArtists = new HashSet<>();
-
-    @Lob
-    private byte[] cover;
-
-    @ElementCollection
-    @CollectionTable(name = "track")
-    @MapKeyColumn(name = "position")
-    @Column(name = "title")
-    private Map<Integer, String> tracks = new HashMap<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private List<OrderItem> orderItems;
 
     @Override
     public final boolean equals(Object o) {
@@ -37,8 +32,8 @@ public class CD extends Item {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        CD cd = (CD) o;
-        return getId() != null && Objects.equals(getId(), cd.getId());
+        Order order = (Order) o;
+        return getId() != null && Objects.equals(getId(), order.getId());
     }
 
     @Override
