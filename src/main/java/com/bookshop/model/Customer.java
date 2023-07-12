@@ -1,6 +1,7 @@
 package com.bookshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -13,16 +14,24 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotBlank
+    @NonNull
     private String firstName;
 
+    @NotBlank
+    @NonNull
     private String lastName;
 
+    @NotBlank
+    @NonNull
     private String email;
 
     private String phoneNumber;
