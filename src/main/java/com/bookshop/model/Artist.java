@@ -23,7 +23,7 @@ public class Artist {
 
     @ManyToMany
     @JoinTable(
-            name = "artist_cd",
+            name = "artist_cds",
             joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "cd_id")
     )

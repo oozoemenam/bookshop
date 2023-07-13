@@ -6,25 +6,42 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
+@NamedQuery(name = "findAllBooks", query = "SELECT b FROM Book b")
 public class Book extends Item {
-    @Size(min = 8, max = 13)
+    @Column(unique = true, nullable = false)
     private String isbn;
 
     private String publisher;
 
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "Tag")
-    @Column(name = "Name")
+    @CollectionTable(name = "tag")
+    @Column(name = "name")
     private List<String> tags = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(
+            name = "book_chapters",
+            joinColumns = {@JoinColumn(name = "book_id")}
+    )
+    @MapKeyColumn(name = "position")
+    // @Column(name = "chapter")
+    private Map<Integer, Chapter> chapters = new HashMap<>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "book_authors",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id")}
+    )
+    @ToString.Exclude
+    private Set<Author> authors = new HashSet<>();
 
     @Positive
     private Integer numOfPages;

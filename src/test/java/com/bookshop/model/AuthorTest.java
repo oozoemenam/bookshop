@@ -48,7 +48,8 @@ public class AuthorTest {
     @Test
     void shouldNotCreateAuthorWithNullName() {
         Author author = new Author();
-        author.setName(null);
+        author.setName("");
+        assertThrows(NullPointerException.class, () -> author.setName(null));
 
         tx.begin();
         em.persist(author);

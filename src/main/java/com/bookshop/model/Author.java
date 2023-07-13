@@ -1,26 +1,30 @@
 package com.bookshop.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class Author {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotBlank
+    @NonNull
     @Column(nullable = false)
     private String name;
 
@@ -31,6 +35,10 @@ public class Author {
     private String bio;
 
     private LocalDate dateOfBirth;
+
+    @ManyToMany(mappedBy = "authors")
+    @ToString.Exclude
+    private Set<Book> books = new HashSet<>();
 
     @Override
     public final boolean equals(Object o) {
