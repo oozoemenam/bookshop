@@ -1,6 +1,7 @@
 package com.bookshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -12,15 +13,7 @@ import java.util.Set;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Artist {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private String firstName;
-
-    private String lastName;
-
+public class Artist extends Person {
     @ManyToMany
     @JoinTable(
             name = "artist_cds",
