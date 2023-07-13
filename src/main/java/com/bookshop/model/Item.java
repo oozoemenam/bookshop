@@ -1,10 +1,14 @@
 package com.bookshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.math.BigDecimal;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -17,11 +21,11 @@ public class Item {
     @GeneratedValue
     protected Long id;
 
-    @Column(nullable = false)
+    @NotBlank
     protected String title;
 
-    @Column(length = 500)
+    @Size(max = 2000)
     protected String description;
 
-    protected Float price;
+    protected BigDecimal price;
 }

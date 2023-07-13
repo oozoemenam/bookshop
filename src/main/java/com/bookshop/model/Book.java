@@ -1,6 +1,8 @@
 package com.bookshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -14,7 +16,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 public class Book extends Item {
-
+    @Size(min = 8, max = 13)
     private String isbn;
 
     private String publisher;
@@ -24,7 +26,7 @@ public class Book extends Item {
     @Column(name = "Name")
     private List<String> tags = new ArrayList<>();
 
-    @Column(nullable = false)
+    @Positive
     private Integer numOfPages;
 
     private Boolean illustrations;

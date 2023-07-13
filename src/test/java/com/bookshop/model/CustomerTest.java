@@ -137,6 +137,6 @@ public class CustomerTest {
         tx.commit();
 
         Customer foundCustomer = em.find(Customer.class, customer.getId());
-        assertEquals("John", customer.getFirstName());
+        assertEquals("John", foundCustomer.getFirstName());
     }
 }

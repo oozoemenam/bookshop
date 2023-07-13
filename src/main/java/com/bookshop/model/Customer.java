@@ -7,6 +7,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,6 +35,7 @@ public class Customer {
     @NonNull
     private String email;
 
+    @Column(length = 15)
     private String phoneNumber;
 
     @ElementCollection
@@ -47,6 +49,29 @@ public class Customer {
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime creationDate;
+
+    // Same as @NotBlank
+    @PrePersist
+    @PreUpdate
+    private void validate() {
+        if (firstName == null || firstName.isEmpty()) {
+            throw new IllegalArgumentException("Invalid first name");
+        }
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalArgumentException("Invalid last name");
+        }
+    }
+
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    public void calculateAge() {
+        if (dateOfBirth == null) {
+            age = null;
+            return;
+        }
+        age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
 
     @Override
     public final boolean equals(Object o) {
