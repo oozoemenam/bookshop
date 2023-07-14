@@ -3,8 +3,7 @@ package com.bookshop.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -27,7 +26,16 @@ public class Item {
     @Size(max = 2000)
     protected String description;
 
+    @NotNull
+    @Positive
+    @Digits(integer = 4, fraction = 2)
     protected BigDecimal price;
+
+    @NotNull
+    @DecimalMin("5.8")
+    public BigDecimal calculatePrice(@DecimalMin("1.4") BigDecimal discountRate) {
+        return price.multiply(discountRate);
+    }
 
     @Override
     public boolean equals(Object o) {

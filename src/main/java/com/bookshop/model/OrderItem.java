@@ -3,25 +3,35 @@ package com.bookshop.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NonNull
     private String item;
 
-    private Double unitPrice;
+    @Positive
+    private BigDecimal unitPrice;
 
+    @Positive
+    @NonNull
     private Integer quantity;
 
     @Override

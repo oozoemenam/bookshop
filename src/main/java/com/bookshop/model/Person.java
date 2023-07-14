@@ -3,10 +3,8 @@ package com.bookshop.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -37,6 +35,10 @@ public abstract class Person {
 
     @Past
     private LocalDate dateOfBirth;
+
+    @Transient
+    @Min(value = 18, message="{com.bookshop.model.Person.age}")
+    private Integer age;
 
     @Override
     public boolean equals(Object o) {

@@ -1,6 +1,10 @@
 package com.bookshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -28,7 +32,9 @@ public class CD extends Item {
     @CollectionTable(name = "track")
     @MapKeyColumn(name = "position")
     @Column(name = "title")
-    private Map<Integer, String> tracks = new HashMap<>();
+    @NotEmpty
+    @Size(max = 12)
+    private Map<@Positive Integer, @NotBlank String> tracks = new HashMap<>();
 
     @Override
     public final boolean equals(Object o) {

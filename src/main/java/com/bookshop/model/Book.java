@@ -1,6 +1,8 @@
 package com.bookshop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -23,7 +25,7 @@ public class Book extends Item {
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "tag")
     @Column(name = "name")
-    private List<String> tags = new ArrayList<>();
+    private List<@NotBlank String> tags = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(
@@ -32,7 +34,7 @@ public class Book extends Item {
     )
     @MapKeyColumn(name = "position")
     // @Column(name = "chapter")
-    private Map<Integer, Chapter> chapters = new HashMap<>();
+    private Map<Integer, @Valid Chapter> chapters = new HashMap<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

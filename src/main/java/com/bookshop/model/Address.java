@@ -2,6 +2,7 @@ package com.bookshop.model;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Embeddable
@@ -25,6 +26,7 @@ public class Address {
 
     private String state;
 
+    @Size(max = 5)
     private String zipCode;
 
     @NotBlank
