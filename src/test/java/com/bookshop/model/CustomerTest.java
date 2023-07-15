@@ -19,7 +19,7 @@ public class CustomerTest {
     private static EntityTransaction tx;
 
     Customer customer = new Customer("George", "Bush", "bush@domain.com");
-    Address address = new Address("Via Natale Palli 22", "Torino", "Italy");
+    Address address = new Address("Via Natale Palli 22", "Torino", "10152", "Italy");
 
     @BeforeAll
     public static void init() {

@@ -3,12 +3,14 @@ package com.bookshop.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,11 +26,11 @@ public class Customer {
     @GeneratedValue
     private Long id;
 
-    @NotBlank
+    @NotEmpty
     @NonNull
     private String firstName;
 
-    @NotBlank
+    @NotEmpty
     @NonNull
     private String lastName;
 
@@ -50,6 +52,9 @@ public class Customer {
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime creationDate;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders = new ArrayList<>();
 
     // Same as @NotBlank
     @PrePersist

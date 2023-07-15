@@ -1,12 +1,13 @@
 package com.bookshop.model;
 
+import com.bookshop.validation.constraints.Isbn;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.validator.constraints.ISBN;
 
 import java.util.*;
 
@@ -18,6 +19,7 @@ import java.util.*;
 @NamedQuery(name = "findAllBooks", query = "SELECT b FROM Book b")
 public class Book extends Item {
     @Column(unique = true, nullable = false)
+    // @Isbn @ISBN
     private String isbn;
 
     private String publisher;

@@ -73,7 +73,7 @@ public class BookTest {
     @Test
     void shouldPersistBookWithAuthors() {
         Book book = new Book();
-        book.setTitle("C++ for noobs");
+        book.setTitle("C++ for complete idiots");
         book.setPrice(BigDecimal.valueOf(22.50));
         book.setIsbn("5-84023-742-5");
         book.setNumOfPages(345);

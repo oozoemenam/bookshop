@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -27,7 +28,7 @@ public class OrderItem {
     @NonNull
     private String item;
 
-    @Positive
+    @PositiveOrZero
     private BigDecimal unitPrice;
 
     @Positive

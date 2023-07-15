@@ -1,7 +1,8 @@
 package com.bookshop.model;
 
+import com.bookshop.validation.constraints.ZipCode;
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -14,22 +15,23 @@ import lombok.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class Address {
-    @NotBlank
+    @NotEmpty
     @NonNull
     private String street1;
 
     private String street2;
 
-    @NotBlank
+    @NotEmpty
     @NonNull
     private String city;
 
     private String state;
 
-    @Size(max = 5)
+    @ZipCode
+    @NonNull
     private String zipCode;
 
-    @NotBlank
+    @NotEmpty
     @NonNull
     private String country;
 }
